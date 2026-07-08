@@ -1,0 +1,18 @@
+name: k8s-frontend
+
+services:
+ frontend:
+    image:   k8s-frontend:latest
+    container_name: frontend
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment:
+      NUXT_PUBLIC_BASE_URL: ${NUXT_PUBLIC_BASE_URL}
+    ports:
+      - '80:3000'
+
+networks:
+    backend:
+        external: true

@@ -1,0 +1,21 @@
+<template>
+  <div class="app">
+    <NuxtRouteAnnouncer />
+    <NuxtPage />
+  </div>
+</template>
+
+<style>
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+</style>

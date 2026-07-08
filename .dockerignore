@@ -1,0 +1,7 @@
+*
+!app
+!public
+!bun.lock
+!nuxt.config.ts
+!package.json
+!tsconfig.json
