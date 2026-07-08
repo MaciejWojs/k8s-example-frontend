@@ -1,4 +1,4 @@
-name: Publish k8s-backend Docker image to GHCR
+name: Publish k8s-frontend Docker image to GHCR
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - "v*"
 
 env:
-  IMAGE_NAME: k8s-example-backend
+  IMAGE_NAME: k8s-example-frontend
 
 jobs:
   push:
@@ -42,7 +42,7 @@ jobs:
         uses: docker/build-push-action@v7
         with:
           context: .
-          file: Dockerfile
+          file: dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: |
