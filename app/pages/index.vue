@@ -2,23 +2,10 @@
 const config = useRuntimeConfig()
 const baseUrl = config.public.baseUrl
 
-let posts: any[] = []
-let error = false
-
-try {
-    const result = await fetch(`${baseUrl}/api/v1/posts`, {
-        method: "GET",
-    })
-
-    if (!result.ok) {
-        throw new Error(`Request failed with status ${result.status}`)
-    }
-
-    posts = await result.json()
-} catch (e) {
-    console.error("Nie udało się pobrać artykułów:", e)
-    error = true
-}
+const { data: posts, error, pending } = useFetch<any[]>(`${baseUrl}/api/v1/posts`, {
+    server: false,
+    default: () => [],
+})
 </script>
 
 <template>
@@ -31,7 +18,13 @@ try {
             </p>
         </header>
 
-        <section v-if="error" class="error-state">
+        <section v-if="pending" class="empty-state">
+            <div class="empty-icon" aria-hidden="true">⏳</div>
+            <h2>Ładowanie…</h2>
+            <p>Pobieranie wpisów, chwileczkę.</p>
+        </section>
+
+        <section v-else-if="error" class="error-state">
             <div class="error-icon" aria-hidden="true">⚠️</div>
             <h2>Nie udało się pobrać artykułów</h2>
             <p>Wystąpił problem podczas ładowania wpisów. Spróbuj ponownie później.</p>
