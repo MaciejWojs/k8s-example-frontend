@@ -91,7 +91,7 @@ jobs:
         shell: bash
         run: |
           export VERSION=${{ needs.push.outputs.image_url }}
-          yq eval-all -i '(. | select(.kind == "Deployment").spec.template.spec.containers[] | select(.name=="frontend").image) = env(VERSION)' k8s-example/k8s-example-frontend.yaml
+          yq eval-all -i '(. | select(.kind == "Deployment").spec.template.spec.containers[] | select(.name=="frontend").image) = env(VERSION)' k8s-example/frontend/frontend.yaml
       - name: Commit and push changes
         run: |
           git add .
